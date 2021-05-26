@@ -14,15 +14,12 @@ function MainInfo() {
 
     const getData = async () => {
         await axios.get(url)
-            .then(response => setGit(response.data))
+            .then(response => setGit(response.data), setdisplayState(true), console.log(displayState))
             .catch(error => console.log(error))
-
-        setdisplayState(true);
-
     };
 
-
-    const fullName = git ? git.name : '';
+    // if git has info -> pass git values to fullName and imgUrl, else -> pass empty strings
+    const fullName = git ? git.name : ''; 
     const imgUrl = git ? git.avatar_url : '';
 
     return (
@@ -34,7 +31,7 @@ function MainInfo() {
             </div>
 
             <div className="wrapper">
-                <DisplayInfo url={imgUrl} fullName={fullName} state={displayState} />
+                <DisplayInfo url={imgUrl} fullName={fullName} state={displayState}/>  {/* state -> sending displayState as prop to DisplayInfo.js */}
             </div>
         </div>
     );
